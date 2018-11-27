@@ -35,7 +35,9 @@ class GetData:
             return requests.get(self.API_URL, params=para)
 
         def shaping(self):
-            data_dict = self.get_smth().json()['features'][0]['properties']['parameter']
+            response_json = self.get_smth().json()
+            print(response_json['parameterInformation'])
+            data_dict = response_json['features'][0]['properties']['parameter']
             # [print(len(dat)) for dat in data_dict.values()]
             # faudrait vérifier qu'il n'y ai pas de trous dans les dates
 
