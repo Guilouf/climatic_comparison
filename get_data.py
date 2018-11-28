@@ -74,7 +74,7 @@ class GetData:
                                    location=self.location,
                                    )
                     object_list.append(obj)
-                except ValueError:  # une valeur manquante dans la ligne
+                except (ValueError, AssertionError) as e:  # une valeur manquante dans la ligne, ou abérrante
                     pass
 
             # a ne surtout pas mettre ds la boucle, ca fait des integrity error et tu sais pas d'ou ca viens..

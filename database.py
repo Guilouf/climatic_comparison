@@ -1,7 +1,7 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, Float, Date
 from sqlalchemy import create_engine, UniqueConstraint
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, validates
 
 eng = create_engine('sqlite:///database.db')
 # supprime la base en case de changement de schéma..
@@ -33,6 +33,12 @@ class DataLine(Base):
         """Converts the sky insolation incident from MJ/m²/jr to µmol/m²/s"""
         # je sais pas quel est le calcul mais ca fait pas très scientifique..
         return ((self.sky_insolation/86400)*1000000)*4.75*0.63
+
+    @validates('sky_insolation', 'precipitation')
+    def missing_data(self, key, field):
+        """Check if there is no aberrant/missing values in these fields"""
+        assert field != -99
+        return field
 
 
 Base.metadata.bind = eng
