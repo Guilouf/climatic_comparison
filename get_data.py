@@ -36,7 +36,8 @@ class GetData:
 
         def shaping(self):
             response_json = self.get_smth().json()
-            print(response_json['parameterInformation'])
+            self.param_real_list = response_json['parameterInformation']
+            # il y a parfois plus de parametres ds la réponse
             data_dict = response_json['features'][0]['properties']['parameter']
             # [print(len(dat)) for dat in data_dict.values()]
             # faudrait vérifier qu'il n'y ai pas de trous dans les dates
@@ -52,6 +53,7 @@ class GetData:
             # print(self.shaped_data)
             with open('output.csv', 'w', encoding='utf-8') as csv_file:
                 writer = csv.writer(csv_file, delimiter=',', lineterminator='\n')
+                writer.writerow(['date', *self.param_real_list.keys()])  # order ok in 3.6
                 for time, value in self.shaped_data.items():  # maintenant les dicos sont ordonnés
                     writer.writerow([time, *value.values()])
                     print([time, *value.values()])
