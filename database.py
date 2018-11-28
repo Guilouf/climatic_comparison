@@ -40,24 +40,3 @@ Base.metadata.create_all()
 
 Session = sessionmaker(bind=eng)
 ses = Session()
-
-# try:
-#     obj = DataLine(date=datetime.strptime(line[0], '%d/%m/%Y'),
-#                    sky_insolation=to_float(line[1]),
-#                    conversion=to_float(line[2]),
-#                    precipitation=to_float(line[3]),
-#                    temperature=to_float(line[4]),
-#                    temperature_max=to_float(line[5]),
-#                    temperature_min=to_float(line[6]),
-#                    location=line[7],
-#                    )
-#     object_list.append(obj)
-# except ValueError:  # une valeur manquante dans la ligne
-#     pass
-#
-# ses.bulk_save_objects(object_list)
-# ses.commit()
-
-
-
-
