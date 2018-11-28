@@ -1,0 +1,10 @@
+[
+  {"essai": "vendee",
+  "dates": [20150101, 20181031],
+  "gps": [46.3882, -0.9634],
+  "elevation": 57.26},
+  {"essai": "charente_maritime",
+  "dates": [20150101, 20181031],
+  "gps": [45.6183, -0.9206],
+  "elevation": 29.68}
+]
