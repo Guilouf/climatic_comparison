@@ -36,8 +36,9 @@ class DataLine(Base):
 
     @validates('sky_insolation', 'precipitation')
     def missing_data(self, key, field):
-        """Check if there is no aberrant/missing values in these fields"""
-        assert field != -99
+        """Check if there is no aberrant/missing values in these fields, return as N/A"""
+        if field == -99:
+            return None
         return field
 
 
