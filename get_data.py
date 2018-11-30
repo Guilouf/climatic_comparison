@@ -94,3 +94,4 @@ if __name__ == '__main__':
             GetData(loc['essai'], *loc['gps'], *loc['dates'],
                     param_list,
                     elevation=loc['elevation']).to_database()
+            print(f"{loc['essai']} inserted! ")
