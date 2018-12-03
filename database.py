@@ -1,4 +1,5 @@
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy import Column, Integer, String, Float, Date, extract
 from sqlalchemy import create_engine, UniqueConstraint
 from sqlalchemy.orm import sessionmaker, validates
@@ -33,6 +34,15 @@ class DataLine(Base):
         """Converts the sky insolation incident from MJ/m²/jr to µmol/m²/s"""
         # je sais pas quel est le calcul mais ca fait pas très scientifique..
         return ((self.sky_insolation/86400)*1000000)*4.75*0.63
+
+    @hybrid_property
+    def date_year(self):
+        return self.date.year
+
+    @date_year.expression
+    def date_year(self):
+        """To query a specific year from the date"""
+        return extract('year', DataLine.date)
 
     @validates('sky_insolation', 'precipitation')
     def missing_data(self, key, field):
