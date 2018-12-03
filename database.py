@@ -44,6 +44,11 @@ class DataLine(Base):
         """To query a specific year from the date"""
         return extract('year', DataLine.date)
 
+    @property
+    def date_month_day(self):
+        """Outputs the date with only month and day"""
+        return self.date.strftime('%m-%d')
+
     @validates('sky_insolation', 'precipitation')
     def missing_data(self, key, field):
         """Check if there is no aberrant/missing values in these fields, return as N/A"""
