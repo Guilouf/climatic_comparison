@@ -1,5 +1,5 @@
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, Float, Date
+from sqlalchemy import Column, Integer, String, Float, Date, extract
 from sqlalchemy import create_engine, UniqueConstraint
 from sqlalchemy.orm import sessionmaker, validates
 
@@ -47,3 +47,9 @@ Base.metadata.create_all()
 
 Session = sessionmaker(bind=eng)
 ses = Session()
+
+
+year = extract('year', DataLine.date)
+month = extract('month', DataLine.date)
+day = extract('day', DataLine.date)
+between = DataLine.date.between
