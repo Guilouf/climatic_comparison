@@ -15,9 +15,10 @@ query_vendee = ses.query(DataLine).filter_by(location='vendee').\
 query_charente = ses.query(DataLine).filter_by(location='charente_maritime').filter(month > 2, month < 5)
 
 fig, ax = plt.subplots()
+fig.autofmt_xdate()
 
 
-ax.plot(get_col('date_month_day', query_charente.filter_by(date_year=2018)),
+ax.plot(get_col('date', query_charente.filter_by(date_year=2018)),
         get_col('temperature', query_charente.filter_by(date_year=2018)), label='temp_charente_2018')
 
 ax.legend()
