@@ -87,7 +87,7 @@ if __name__ == '__main__':
 
     param_list = ['T2M', 'T2M_MIN', 'T2M_MAX', 'PS', 'PRECTOT', 'ALLSKY_SFC_SW_DWN']
 
-    with open('locations.json', 'r') as locations_file:
+    with open('locations.yaml', 'r') as locations_file:
         locations = json.load(locations_file)
 
         for loc in locations:
