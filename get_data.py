@@ -83,12 +83,12 @@ class GetData:
 
 
 if __name__ == '__main__':
-    import json
+    import yaml
 
     param_list = ['T2M', 'T2M_MIN', 'T2M_MAX', 'PS', 'PRECTOT', 'ALLSKY_SFC_SW_DWN']
 
     with open('locations.yaml', 'r') as locations_file:
-        locations = json.load(locations_file)
+        locations = yaml.load(locations_file)
 
         for loc in locations:
             GetData(loc['essai'], *loc['gps'], *loc['dates'],
