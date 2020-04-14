@@ -1,7 +1,7 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy import Column, Integer, String, Float, Date, extract
-from sqlalchemy import create_engine, UniqueConstraint
+from sqlalchemy import create_engine, UniqueConstraint, tuple_
 from sqlalchemy.orm import sessionmaker, validates
 
 eng = create_engine('sqlite:///database.db')
@@ -44,10 +44,15 @@ class DataLine(Base):
         """To query a specific year from the date"""
         return extract('year', DataLine.date)
 
-    @property
+    @hybrid_property
     def date_month_day(self):
         """Outputs the date with only month and day"""
         return self.date.strftime('%m-%d')
+
+    @date_month_day.expression
+    def date_month_day(self):
+        """Query specific date of a year"""
+        return tuple_(extract('month', DataLine.date), extract('day', DataLine.date))
 
     @validates('sky_insolation', 'precipitation')
     def missing_data(self, key, field):
